@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.webkit.*
 import android.widget.Toast
 import org.json.JSONArray
@@ -13,11 +14,11 @@ import org.json.JSONArray
 class MainActivity : Activity() {
 
     private lateinit var web: WebView
+    private var exportContent = ""
+
     private val prefs by lazy {
         getSharedPreferences("html_apps", MODE_PRIVATE)
     }
-
-    private var exportContent = ""
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,11 +26,22 @@ class MainActivity : Activity() {
 
         web = WebView(this)
         web.setBackgroundColor(0xFF080D1B.toInt())
+        web.setLayerType(View.LAYER_TYPE_HARDWARE, null)
 
-        web.settings.javaScriptEnabled = true
-        web.settings.domStorageEnabled = true
-        web.settings.allowFileAccess = false
-        web.settings.allowContentAccess = false
+        web.settings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            allowFileAccess = false
+            allowContentAccess = false
+            loadsImagesAutomatically = true
+            cacheMode = WebSettings.LOAD_DEFAULT
+            builtInZoomControls = false
+            displayZoomControls = false
+            setSupportZoom(false)
+        }
+
+        web.isVerticalScrollBarEnabled = false
+        web.isHorizontalScrollBarEnabled = false
 
         web.webChromeClient = object : WebChromeClient() {
 
@@ -92,7 +104,7 @@ class MainActivity : Activity() {
                     .putString("apps", parsed.toString())
                     .apply()
             } catch (e: Exception) {
-                message("ذخیره‌سازی ناموفق بود")
+                message("خطا در ذخیره‌سازی")
             }
         }
 
@@ -166,10 +178,29 @@ class MainActivity : Activity() {
 
     @Deprecated("Deprecated in Android")
     override fun onBackPressed() {
-        if (::web.isInitialized && web.canGoBack()) {
-            web.goBack()
-        } else {
-            super.onBackPressed()
+        web.evaluateJavascript(
+            """
+            (function(){
+              if(typeof closePreviewFullscreen==='function'){
+                return closePreviewFullscreen();
+              }
+              return false;
+            })();
+            """.trimIndent()
+        ) { result ->
+            if (result != "true") {
+                super.onBackPressed()
+            }
         }
+    }
+
+    override fun onDestroy() {
+        if (::web.isInitialized) {
+            web.stopLoading()
+            web.loadUrl("about:blank")
+            web.removeJavascriptInterface("AndroidStore")
+            web.destroy()
+        }
+        super.onDestroy()
     }
 }

@@ -1,41 +1,246 @@
-<!doctype html>
-<html lang="fa" dir="rtl"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="color-scheme" content="dark"><title>HTML App Studio</title>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>HTML App Studio</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 90% 0%,#5145a755,transparent 45%),radial-gradient(ellipse at 0% 80%,#087d7850,transparent 45%),#080d1b;color:#f5f6ff;font-family:Tahoma,Arial,sans-serif;min-height:100vh}
-header{padding:22px 17px 12px;display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#9184ff,#37d9c3);display:grid;place-items:center;font-size:23px}h1{font-size:19px;margin:0}header small{color:#aab5cc;display:block;margin-top:5px}
-main{padding:8px 14px 28px;max-width:800px;margin:auto}.glass{background:#ffffff0d;border:1px solid #ffffff20;border-radius:19px;padding:14px;backdrop-filter:blur(20px);box-shadow:0 15px 40px #0003;margin-bottom:13px}
-.row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.title{font-size:14px;font-weight:bold}.muted{font-size:11px;color:#aab5cc}
-input,textarea{width:100%;border:1px solid #ffffff20;background:#070c19;color:#fff;border-radius:12px;padding:12px;outline:none;font:13px Tahoma;margin-top:8px}textarea{height:250px;direction:ltr;text-align:left;font-family:monospace;line-height:1.5;resize:vertical}
-button{border:1px solid #ffffff24;background:#ffffff12;color:#fff;padding:10px 13px;border-radius:12px;font:12px Tahoma}button.primary{background:linear-gradient(120deg,#7869ee,#388fdb);border:0}button.red{color:#ff9cac}.buttons{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
-#list{display:flex;gap:7px;overflow:auto;padding:10px 0 2px}.app{white-space:nowrap}.app.active{background:#7c6cff55;border-color:#9d92ff}
-iframe{width:100%;height:310px;border:0;border-radius:12px;background:white;margin-top:10px}.empty{color:#aab5cc;font-size:12px;padding:8px 0}.note{font-size:10px;color:#9eabc4;line-height:1.9}
-</style></head><body>
-<header><div class="logo">✦</div><div><h1>استودیو HTML</h1><small>ساخت و اجرای اپلیکیشن‌های HTML</small></div></header>
+*{box-sizing:border-box}
+body{
+margin:0;color:#f5f6ff;min-height:100vh;
+font-family:Tahoma,Arial;
+background:radial-gradient(ellipse at 90% 0%,#5145a755,transparent 45%),radial-gradient(ellipse at 0% 80%,#087d7850,transparent 45%),#080d1b
+}
+header{padding:22px 17px 12px;display:flex;align-items:center;gap:12px}
+.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#9184ff,#37d9c3);display:grid;place-items:center;font-size:23px}
+h1{font-size:19px;margin:0}
+header small{color:#aab5cc;display:block;margin-top:5px}
+main{padding:8px 14px 28px;max-width:800px;margin:auto}
+.glass{background:#ffffff0d;border:1px solid #ffffff20;border-radius:19px;padding:14px;backdrop-filter:blur(20px);box-shadow:0 15px 40px #0003;margin-bottom:13px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.title{font-size:14px;font-weight:bold}
+.muted{font-size:11px;color:#aab5cc}
+input,textarea{width:100%;border:1px solid #ffffff20;background:#070c19;color:white;border-radius:12px;padding:12px;outline:none;font:13px Tahoma;margin-top:8px}
+textarea{height:250px;direction:ltr;text-align:left;font-family:monospace;line-height:1.5;resize:vertical}
+button{border:1px solid #ffffff24;background:#ffffff12;color:white;padding:11px 13px;border-radius:12px;font:12px Tahoma;cursor:pointer}
+button:active{opacity:.65;transform:scale(.97)}
+.primary{background:linear-gradient(120deg,#7869ee,#388fdb);border:0}
+.red{color:#ff9cac}
+.buttons{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+#list{display:flex;gap:7px;overflow:auto;padding:10px 0 2px}
+.app{white-space:nowrap}
+.app.active{background:#7c6cff55;border-color:#9d92ff}
+iframe{width:100%;height:310px;border:0;border-radius:12px;background:white;margin-top:10px}
+.empty{color:#aab5cc;font-size:12px;padding:8px 0}
+.note{font-size:10px;color:#9eabc4;line-height:1.9}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">✦</div>
+<div><h1>استودیو HTML</h1><small>ساخت و اجرای اپلیکیشن‌های HTML</small></div>
+</header>
+
 <main>
-<section class="glass"><div class="row"><span class="title">اپلیکیشن‌های ذخیره‌شده</span><button class="primary" onclick="fresh()">＋ پروژه جدید</button></div><div id="list"></div></section>
+<section class="glass">
+<div class="row">
+<span class="title">اپلیکیشن‌های ذخیره‌شده</span>
+<button class="primary" onclick="fresh()">＋ پروژه جدید</button>
+</div>
+<div id="list"></div>
+</section>
+
 <section class="glass">
 <div class="title">ویرایش پروژه</div>
 <input id="name" maxlength="60" placeholder="نام اپلیکیشن">
 <textarea id="code" spellcheck="false" autocapitalize="off" placeholder="کد کامل HTML را اینجا وارد کن..."></textarea>
-<div class="buttons"><button class="primary" onclick="saveApp()">ذخیره در برنامه</button><button onclick="run()">▶ اجرا</button><button onclick="exportHtml()">خروجی HTML</button><button class="red" onclick="deleteApp()">حذف</button></div>
+<div class="buttons">
+<button class="primary" onclick="saveApp()">ذخیره در برنامه</button>
+<button onclick="run()">▶ اجرا</button>
+<button onclick="exportHtml()">خروجی HTML</button>
+<button class="red" onclick="deleteApp()">حذف</button>
+</div>
 </section>
-<section class="glass"><div class="row"><span class="title">پیش‌نمایش</span><span class="muted">داخل خود برنامه</span></div><iframe id="preview" sandbox="allow-scripts allow-forms allow-modals"></iframe></section>
-<p class="note">پروژه‌ها در حافظه خصوصی همین اپلیکیشن ذخیره می‌شوند. حذف داده‌های برنامه، پروژه‌ها را پاک می‌کند. فقط کدهایی را اجرا کن که به آن‌ها اعتماد داری.</p>
+
+<section class="glass">
+<div class="row">
+<span class="title">پیش‌نمایش</span>
+<span class="muted">داخل خود برنامه</span>
+</div>
+<iframe id="preview" sandbox="allow-scripts allow-forms allow-modals"></iframe>
+</section>
+
+<p class="note">پروژه‌ها در حافظه داخلی برنامه ذخیره می‌شوند. برای جلوگیری از از دست رفتن اطلاعات، از پروژه‌ها خروجی بگیر.</p>
 </main>
+
 <script>
-const starter='<!doctype html>\\n<html lang="fa" dir="rtl">\\n<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>اپ من</title></head>\\n<body style="font-family:Tahoma;padding:25px"><h2>سلام! 👋</h2><p>اولین اپلیکیشن HTML من</p><button onclick="alert(\\'سلام!\\')">امتحان کن</button></body></html>';
-let apps=[],current=null;
-const $=id=>document.getElementById(id);
-function load(){try{apps=JSON.parse(AndroidStore.load()||'[]')}catch(e){apps=[]}draw();if(apps.length)select(apps[0].id);else fresh()}
-function persist(){AndroidStore.save(JSON.stringify(apps))}
-function draw(){let l=$('list');l.innerHTML='';if(!apps.length){l.innerHTML='<div class="empty">هنوز پروژه‌ای ذخیره نشده است.</div>';return}apps.forEach(a=>{let b=document.createElement('button');b.className='app'+(a.id===current?' active':'');b.textContent='🌐 '+a.name;b.onclick=()=>select(a.id);l.appendChild(b)})}
-function fresh(){current=null;$('name').value='اپلیکیشن جدید';$('code').value=starter;draw();run()}
-function select(id){let a=apps.find(x=>x.id===id);if(!a)return;current=id;$('name').value=a.name;$('code').value=a.html;draw();run()}
-function saveApp(){let name=$('name').value.trim()||'اپ بدون نام',html=$('code').value;if(!html.trim()){AndroidStore.message('کد HTML را وارد کن');return}if(current){let a=apps.find(x=>x.id===current);Object.assign(a,{name,html,updated:Date.now()})}else{current='p'+Date.now();apps.unshift({id:current,name,html,updated:Date.now()})}persist();draw();AndroidStore.message('پروژه ذخیره شد ✓')}
-function run(){$('preview').srcdoc=$('code').value}
-function deleteApp(){if(!current){AndroidStore.message('پروژه ذخیره‌شده‌ای انتخاب نشده');return}if(!confirm('این پروژه حذف شود؟'))return;apps=apps.filter(x=>x.id!==current);current=null;persist();fresh();AndroidStore.message('پروژه حذف شد')}
-function exportHtml(){let blob=new Blob([$('code').value],{type:'text/html'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=(($('name').value||'app').replace(/[^a-z0-9آ-ی_-]/gi,'_'))+'.html';a.click();URL.revokeObjectURL(url)}
+'use strict';
+
+const starter = `<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اپ من</title>
+</head>
+<body style="font-family:Tahoma;padding:25px">
+<h2>سلام! 👋</h2>
+<p>اولین اپلیکیشن HTML من</p>
+<button onclick="alert('سلام!')">امتحان کن</button>
+</body>
+</html>`;
+
+let apps = [];
+let current = null;
+
+const $ = id => document.getElementById(id);
+
+function notify(text){
+    if(window.AndroidStore){
+        AndroidStore.message(text);
+    }else{
+        alert(text);
+    }
+}
+
+function load(){
+    try{
+        apps = JSON.parse(AndroidStore.load() || '[]');
+        if(!Array.isArray(apps)) apps=[];
+    }catch(e){
+        apps=[];
+    }
+
+    draw();
+
+    if(apps.length){
+        select(apps[0].id);
+    }else{
+        fresh();
+    }
+}
+
+function persist(){
+    try{
+        AndroidStore.save(JSON.stringify(apps));
+        return true;
+    }catch(e){
+        notify('خطا در ذخیره پروژه');
+        return false;
+    }
+}
+
+function draw(){
+    const list=$('list');
+    list.innerHTML='';
+
+    if(!apps.length){
+        list.innerHTML='<div class="empty">هنوز پروژه‌ای ذخیره نشده است.</div>';
+        return;
+    }
+
+    apps.forEach(a=>{
+        const b=document.createElement('button');
+        b.className='app'+(a.id===current?' active':'');
+        b.textContent='🌐 '+a.name;
+        b.onclick=()=>select(a.id);
+        list.appendChild(b);
+    });
+}
+
+function fresh(){
+    current=null;
+    $('name').value='اپلیکیشن جدید';
+    $('code').value=starter;
+    draw();
+    run();
+}
+
+function select(id){
+    const a=apps.find(x=>x.id===id);
+    if(!a)return;
+
+    current=id;
+    $('name').value=a.name;
+    $('code').value=a.html;
+    draw();
+    run();
+}
+
+function saveApp(){
+    const name=$('name').value.trim()||'اپ بدون نام';
+    const html=$('code').value;
+
+    if(!html.trim()){
+        notify('کد HTML را وارد کن');
+        return;
+    }
+
+    if(current){
+        const a=apps.find(x=>x.id===current);
+        if(!a)return;
+        a.name=name;
+        a.html=html;
+        a.updated=Date.now();
+    }else{
+        current='p'+Date.now();
+        apps.unshift({
+            id:current,
+            name:name,
+            html:html,
+            updated:Date.now()
+        });
+    }
+
+    if(persist()){
+        draw();
+        notify('پروژه ذخیره شد ✓');
+    }
+}
+
+function run(){
+    $('preview').srcdoc=$('code').value;
+}
+
+function deleteApp(){
+    if(!current){
+        notify('ابتدا یک پروژه ذخیره‌شده انتخاب کن');
+        return;
+    }
+
+    if(!confirm('این پروژه حذف شود؟'))return;
+
+    apps=apps.filter(x=>x.id!==current);
+    current=null;
+
+    persist();
+    fresh();
+    notify('پروژه حذف شد');
+}
+
+function exportHtml(){
+    const html=$('code').value;
+    const name=$('name').value.trim()||'app';
+
+    if(!html.trim()){
+        notify('کدی برای خروجی وجود ندارد');
+        return;
+    }
+
+    if(window.AndroidStore){
+        AndroidStore.exportHtml(name,html);
+    }else{
+        const blob=new Blob([html],{type:'text/html'});
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');
+        a.href=url;
+        a.download=name+'.html';
+        a.click();
+        setTimeout(()=>URL.revokeObjectURL(url),2000);
+    }
+}
+
 load();
-</script></body></html>
+</script>
+</body>
+</html>
